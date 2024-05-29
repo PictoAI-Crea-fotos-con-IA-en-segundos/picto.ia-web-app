@@ -4,7 +4,7 @@ const PricingSection = () => {
 return (
     <section className="">
         
-        <div className="max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5">
+        <div id="precios" className="max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5">
             <div className="flex flex-col  space-y-16">
                 <div className="flex gap-14 md:justify-between flex-col md:flex-row items-center">
                     <div className="text-center md:text-left md:max-w-lg space-y-5">
