@@ -38,44 +38,25 @@ const footerBlocks: FooterBlockItemProps[] = [
         title: "Enlaces",
         items: [
             {
-                text: "Acerca de",
+                text: "Nosotros",
                 link: "#"
             },
             {
-                text: "Carrera",
+                text: "Características",
                 link: "#"
             },
             {
-                text: "Contacto",
+                text: "Precios",
                 link: "#"
             },
             {
                 text: "Servicios",
                 link: "#"
             },
-            {
-                text: "Privacidad",
-                link: "#"
-            },
+            
         ]
     },
-    {
-        title: "Recursos",
-        items: [
-            {
-                text: "Blog",
-                link: "#"
-            },
-            {
-                text: "Términos",
-                link: "#"
-            },
-            {
-                text: "FAQ",
-                link: "#"
-            },
-        ]
-    },
+  
 ];
 
 const FooterBlock = () => {

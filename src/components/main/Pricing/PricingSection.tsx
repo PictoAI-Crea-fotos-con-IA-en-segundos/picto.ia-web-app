@@ -27,7 +27,7 @@ return (
                         <div className="min-h-max mb-5">
                             <div className="relative flex items-end">
                                 <div className="flex">
-                                    <span className="text-4xl font-bold text-purple-950 dark:text-white">$0</span>
+                                    <span className="text-4xl font-bold text-purple-950 dark:text-white">S/0</span>
                                 </div>
                                 <span className="text-gray-700 dark:text-gray-300">/Mes</span>
                             </div>
@@ -64,7 +64,7 @@ return (
                         <div className="min-h-max mb-5">
                             <div className="relative flex items-end">
                                 <div className="flex">
-                                    <span className="text-4xl font-bold text-purple-950 dark:text-white">$9.99</span>
+                                    <span className="text-4xl font-bold text-purple-950 dark:text-white">S/9.99</span>
                                 </div>
                                 <span className="text-gray-700 dark:text-gray-300">/Mes</span>
                             </div>
@@ -106,7 +106,7 @@ return (
                         <div className="min-h-max pb-5 relative z-10">
                             <div className="relative flex items-end">
                                 <div className="flex">
-                                    <span className="text-4xl md:text-5xl font-bold text-white">$29.99</span>
+                                    <span className="text-4xl md:text-5xl font-bold text-white">S/29.99</span>
                                 </div>
                                 <span className=" text-xl font-semibold text-gray-200">/Mes</span>
                             </div>
