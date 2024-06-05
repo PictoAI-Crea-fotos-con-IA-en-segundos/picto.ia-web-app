@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navItems = [
   { id: 1, text: "Home", link: "/#home" },
@@ -11,20 +11,28 @@ const navItems = [
 
 const Navbar = () => {
   const [openNavbar, setOpenNavbar] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  }, []);
+
   const toggleNavbar = () => {
     setOpenNavbar((openNavbar) => !openNavbar);
   };
+
   return (
     <>
       <header className="absolute left-0 top-0 w-full flex items-center h-24 z-40">
         <nav className="relative mx-auto lg:max-w-7xl w-full px-5 sm:px-10 md:px-12 lg:px-5 flex gap-x-5 justify-between items-center">
           <div className="flex items-center min-w-max relative">
-          <a href="/" className="font-semibold flex items-center gap-x-2">
-            <div className="flex items-center justify-center">
-               <img src="/icon.ico" alt="Icon" className="h-6 w-6" />
-            </div>
-            <span className="text-lg text-gray-700 dark:text-gray-300 flex items-center">PictoAI</span>
-           </a>
+            <a href="/" className="font-semibold flex items-center gap-x-2">
+              <div className="flex items-center justify-center">
+                <img src="/icon.ico" alt="Icon" className="h-6 w-6" />
+              </div>
+              <span className="text-lg text-gray-700 dark:text-gray-300 flex items-center">PictoAI</span>
+            </a>
           </div>
           <div
             className={`
@@ -45,18 +53,26 @@ const Navbar = () => {
               ))}
             </ul>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 lg:min-w-max mt-10 lg:mt-0">
-              <Link
-                href="/login"
-                className="h-10 flex items-center justify-center w-full sm:w-max rounded-full px-5 border border-gray-200 dark:border-gray-800 text-purple-600 dark:text-gray-300"
-              >
-                Iniciar sesión
-              </Link>
-              <Link
-                href="/register"
-                className="h-10 flex items-center justify-center w-full sm:w-max rounded-full px-5 bg-purple-600 text-white"
-              >
-                Registrarse
-              </Link>
+              {token ? (
+                <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                  <img src="https://res.cloudinary.com/daassyisd/image/upload/v1717594573/vyne2gggoznev3dcae1t.jpg" alt="User" className="h-10 w-10 rounded-full" />
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="h-10 flex items-center justify-center w-full sm:w-max rounded-full px-5 border border-gray-200 dark:border-gray-800 text-purple-600 dark:text-gray-300"
+                  >
+                    Iniciar sesión
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="h-10 flex items-center justify-center w-full sm:w-max rounded-full px-5 bg-purple-600 text-white"
+                  >
+                    Registrarse
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           <div className="flex items-center lg:hidden">
