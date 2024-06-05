@@ -1,10 +1,53 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("https://pictoai-backend-production.up.railway.app/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Login failed: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+
+      if (mounted) {
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8 bg-gray-900">
+    <div className="min-h-screen flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
       <div className="absolute w-full lg:w-1/2 inset-y-0 lg:right-0 hidden lg:block">
         <span className="absolute -left-6 md:left-4 top-24 lg:top-28 w-24 h-24 rotate-90 skew-x-12 rounded-3xl bg-green-400 blur-xl opacity-60 lg:opacity-95" />
         <span className="absolute right-4 bottom-12 w-24 h-24 rounded-3xl bg-blue-600 blur-xl opacity-80" />
@@ -29,10 +72,8 @@ const Login = () => {
               className="mx-auto h-12 w-auto"
             />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Iniciar sesión
-          </h2>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Iniciar sesión</h2>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email-address" className="sr-only">
@@ -44,6 +85,8 @@ const Login = () => {
                   type="email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white rounded-t-md bg-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
                   placeholder="Ingresa tu correo"
                 />
@@ -58,11 +101,15 @@ const Login = () => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white rounded-b-md bg-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
                   placeholder="Contraseña"
                 />
               </div>
             </div>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
