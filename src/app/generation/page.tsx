@@ -24,23 +24,29 @@ export default function Generate() {
 
     return (
         <div style={styles.container}>
-            <h1>Generar Imagen</h1>
-            <input
-                type="text"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Ingresa tu prompt (esto lo cambian como un mensaje del chatbot)"
-                style={styles.input}
-            />
-            <button onClick={handleGenerateImage} disabled={loading} style={styles.button}>
-                {loading ? 'Creando..' : 'Generate Image'}
-            </button>
-            {error && <p style={styles.error}>{error}</p>}
-            {imageUrl && (
-                <div style={styles.imageContainer}>
-                    <img src={imageUrl} alt="Imagen generada" style={styles.image} />
+            <div style={styles.header}>
+                <h1 style={styles.title}>Generador de Imágenes con IA</h1>
+            </div>
+            <div style={styles.content}>
+                <div style={styles.promptContainer}>
+                    <input
+                        type="text"
+                        value={prompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                        placeholder="Ingresa tu prompt..."
+                        style={styles.input}
+                    />
+                    <button onClick={handleGenerateImage} disabled={loading} style={styles.button}>
+                        {loading ? 'Creando...' : 'Generar Imagen'}
+                    </button>
                 </div>
-            )}
+                {error && <p style={styles.error}>{error}</p>}
+                {imageUrl && (
+                    <div style={styles.imageContainer}>
+                        <img src={imageUrl} alt="Imagen generada" style={styles.image} />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
@@ -53,21 +59,48 @@ const styles = {
         justifyContent: 'center',
         height: '100vh',
         padding: '20px',
-        backgroundColor: '#000',
+        backgroundColor: '#1a1a1a',
         color: '#fff',
     },
+    header: {
+        marginBottom: '40px',
+    },
+    title: {
+        fontSize: '2rem',
+        fontWeight: 'bold' as 'bold',
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'column' as 'column',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '600px',
+    },
+    promptContainer: {
+        display: 'flex',
+        width: '100%',
+        marginBottom: '20px',
+    },
     input: {
-        color: '#000',
+        flexGrow: 1,
         padding: '10px',
-        margin: '10px',
-        width: '300px',
+        marginRight: '10px',
+        borderRadius: '5px',
+        border: '1px solid #555',
+        color: '#000',
     },
     button: {
         padding: '10px 20px',
-        margin: '10px',
+        borderRadius: '5px',
+        backgroundColor: '#4caf50',
+        border: 'none',
+        color: '#fff',
+        cursor: 'pointer',
+        transition: 'background-color 0.3s ease',
     },
     error: {
         color: 'red',
+        marginTop: '10px',
     },
     imageContainer: {
         marginTop: '20px',

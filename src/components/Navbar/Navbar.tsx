@@ -12,11 +12,37 @@ const navItems = [
 const Navbar = () => {
   const [openNavbar, setOpenNavbar] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const [userInfo, setUserInfo] = useState<{ firstname: string; lastname: string } | null>(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     setToken(storedToken);
+
+    if (storedToken) {
+      fetchUserInfo(storedToken);
+    }
   }, []);
+
+  const fetchUserInfo = async (token: string) => {
+    try {
+      const response = await fetch("https://pictoai-backend-production.up.railway.app/auth/getInfoByToken", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch user info");
+      }
+
+      const data = await response.json();
+      setUserInfo({ firstname: data.firstname, lastname: data.lastname });
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
 
   const toggleNavbar = () => {
     setOpenNavbar((openNavbar) => !openNavbar);
@@ -54,8 +80,15 @@ const Navbar = () => {
             </ul>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 lg:min-w-max mt-10 lg:mt-0">
               {token ? (
-                <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
-                  <img src="https://res.cloudinary.com/daassyisd/image/upload/v1717594573/vyne2gggoznev3dcae1t.jpg" alt="User" className="h-10 w-10 rounded-full" />
+                <div className="flex items-center gap-2">
+                  <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                    <img src="https://res.cloudinary.com/daassyisd/image/upload/v1717594573/vyne2gggoznev3dcae1t.jpg" alt="User" className="h-10 w-10 rounded-full" />
+                  </div>
+                  {userInfo && (
+                    <span className="text-white dark:text-gray-300">
+                      {`${userInfo.firstname} ${userInfo.lastname}`}
+                    </span>
+                  )}
                 </div>
               ) : (
                 <>
