@@ -40,6 +40,7 @@ const Login = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
+        router.push("/generation");
         setError(error.message);
       } else {
         setError("An unknown error occurred");
