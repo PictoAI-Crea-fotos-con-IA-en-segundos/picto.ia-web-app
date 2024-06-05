@@ -40,7 +40,7 @@ const Register = () => {
 
       // Redirigir al usuario a la página de login
       if (mounted) {
-        router.push("/login");
+        router.push("/generation");
       }
     } catch (error) {
       if (error instanceof Error) {
