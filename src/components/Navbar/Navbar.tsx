@@ -80,15 +80,23 @@ const Navbar = () => {
             </ul>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 lg:min-w-max mt-10 lg:mt-0">
               {token ? (
-                <div className="flex items-center gap-2">
-                  <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
-                    <img src="https://res.cloudinary.com/daassyisd/image/upload/v1717594573/vyne2gggoznev3dcae1t.jpg" alt="User" className="h-10 w-10 rounded-full" />
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                      <img src="https://res.cloudinary.com/daassyisd/image/upload/v1717594573/vyne2gggoznev3dcae1t.jpg" alt="User" className="h-10 w-10 rounded-full" />
+                    </div>
+                    {userInfo && (
+                      <span className="text-white dark:text-gray-300">
+                        {`${userInfo.firstname} ${userInfo.lastname}`}
+                      </span>
+                    )}
                   </div>
-                  {userInfo && (
-                    <span className="text-white dark:text-gray-300">
-                      {`${userInfo.firstname} ${userInfo.lastname}`}
-                    </span>
-                  )}
+                  <Link
+                    href="/generation"
+                    className="h-10 flex items-center justify-center w-full sm:w-max rounded-full px-5 bg-purple-600 text-white"
+                  >
+                    Generar Imagen
+                  </Link>
                 </div>
               ) : (
                 <>
