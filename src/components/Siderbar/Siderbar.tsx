@@ -7,6 +7,7 @@ import { FiSettings } from "react-icons/fi";
 import { CgComment } from "react-icons/cg";
 import { CgDigitalocean } from "react-icons/cg";
 import {  CgMenu } from "react-icons/cg"; // Añadido CgMenu para el ícono del menú
+import { BsStars } from "react-icons/bs";
 
 const Sidebar = () => {
     const [sidebarToggled, setSidebarToggled] = useState(false);
@@ -33,7 +34,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link href="/comunidad" className="flex items-center px-4 py-2.5 gap-x-3 text-white rounded-md bg-purple-500">
-                            <span className="p-2 bg-slate-50 rounded-full"><GiStarsStack className="text-lg text-slate-500"/></span>
+                            <span className="p-2 bg-slate-50 rounded-full"><BsStars className="text-lg text-slate-500"/></span>
                             Comunidad
                         </Link>
                     </li>
