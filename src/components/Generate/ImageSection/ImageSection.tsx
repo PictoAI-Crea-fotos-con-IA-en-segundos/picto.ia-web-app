@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaRegImage } from "react-icons/fa6";
 
 interface Props {
   imageUrl: string | null;
@@ -12,7 +13,8 @@ const ImageSection: React.FC<Props> = ({ imageUrl, error }) => (
       <img src={imageUrl} alt="Generated Image" className="max-w-full max-h-full object-contain" />
     ) : (
       <div className="w-full h-full flex justify-center items-center bg-gray-200">
-        <p className="text-gray-500 text-center">No image loaded</p>
+        <p className="text-gray-500 text-center p-2">No tiene Ningua Imagen </p><FaRegImage className='text-lg text-slate-900' />
+
       </div>
     )}
   </div>
