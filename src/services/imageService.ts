@@ -1,6 +1,6 @@
 // services/imageService.ts
 export async function generateImage(prompt: string): Promise<string> {
-    const response = await fetch('https://6262-181-66-138-81.ngrok-free.app/sdapi/v1/txt2img', {
+    const response = await fetch('https://35eb-181-66-139-198.ngrok-free.app/sdapi/v1/txt2img', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
