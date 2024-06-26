@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
@@ -27,26 +27,27 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       if (!response.ok) {
         throw new Error(`Login failed: ${response.statusText}`);
       }
-
+  
       const data = await response.json();
       localStorage.setItem("token", data.token);
-
+  
+      // Verificar si está montado el componente antes de redirigir
       if (mounted) {
         router.push("/generation");
       }
     } catch (error) {
       if (error instanceof Error) {
-        router.push("/generation");
-        setError(error.message);
+        setError(error.message);  // Actualizar el estado de error para mostrar el mensaje de error
       } else {
         setError("An unknown error occurred");
       }
     }
   };
+  
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
