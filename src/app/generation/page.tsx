@@ -44,7 +44,7 @@ export default function Generate() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-800">
+        <div className="flex flex-col min-h-screen ">
             <div className="flex flex-1 pt-20 container mx-auto px-4">
                 <Sidebar />
                 <div className="flex-1 max-w-4xl mx-auto bg-gray-700 rounded-lg shadow-lg overflow-hidden p-5">
