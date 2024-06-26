@@ -1,9 +1,11 @@
-// services/imageService.ts
+
 export async function generateImage(prompt: string): Promise<string> {
-    const response = await fetch('https://35eb-181-66-139-198.ngrok-free.app/sdapi/v1/txt2img', {
+    const Token = localStorage.getItem("token");
+    const response = await fetch('https://pictoai-backend-production.up.railway.app/api/v1/generate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": `Bearer ${Token}`
         },
         body: JSON.stringify({ prompt }),
     });
